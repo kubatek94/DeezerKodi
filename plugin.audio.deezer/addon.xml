@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.audio.deezer" name="Deezer" version="0.0.1" provider-name="kubatek94">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <!--<import addon="script.module.requests"/>-->
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="start.py">
+    <provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Deezer online music service</summary>
+    <description lang="en">Deezer online music streaming service. Requires Premium account.</description>
+    <language></language>
+    <license>GNU</license>
+    <forum></forum>
+    <website></website>
+    <email></email>
+    <source></source>
+  </extension>
+</addon>

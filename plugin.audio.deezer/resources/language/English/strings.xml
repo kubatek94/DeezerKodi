@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<strings>
+	<!-- Settings -->
+	<string id="1000">Username</string>
+	<string id="1001">Password</string>
+
+	<!-- Menu labels -->
+	<string id="2000">Chart</string>
+	<string id="2001">Radio channels</string>
+	<string id="2002">My playlists</string>
+	<string id="2003">My albums</string>
+	<string id="2004">My artists</string>
+	<string id="2005">Search</string>
+
+	<!-- Dialogs -->
+	<string id="2006">Sign in required</string>
+	<string id="2007">You need to sign in to use Deezer</string>
+	<string id="2008">Do you want to try again, or exit Deezer?</string>
+	<string id="2009">Try again</string>
+	<string id="2010">Exit</string>
+
+	<!-- Artist View Menu -->
+	<string id="3000">Top</string>
+	<string id="3001">Albums</string>
+	<string id="3002">Playlists</string>
+	<string id="3003">Radio</string>
+
+	<!-- Chart View Menu -->
+	<string id="3005">Tracks</string>
+	<string id="3006">Albums</string>
+	<string id="3007">Artists</string>
+	<string id="3008">Playlists</string>
+
+	<!-- Search View Menu -->
+	<string id="3010">Search all</string>
+	<string id="3011">Search artists</string>
+	<string id="3012">Search albums</string>
+	<string id="3013">Search tracks</string>
+</strings>
