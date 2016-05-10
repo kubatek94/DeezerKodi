@@ -1,7 +1,4 @@
 from .View import View
-from .TracksView import TracksView
-from .AlbumsView import AlbumsView
-from .PlaylistsView import PlaylistsView
 
 import os
 import xbmc
@@ -30,6 +27,7 @@ class ArtistTopView(View):
 				listItem = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
 				listItem.setProperty('IsPlayable', 'true')
 				listItem.setArt({'fanart': self.scene.sceneRouter.fanartPath})
+				self.addItemTrackInfo(listItem, track)
 				listItems.append((self.getUrl("/tracks/%d" % track.id), listItem, False))
 			except:
 				pass
