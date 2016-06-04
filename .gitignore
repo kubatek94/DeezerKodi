@@ -1,0 +1,4 @@
+.idea
+addons_generator.py
+*.pyo
+*.pyc
