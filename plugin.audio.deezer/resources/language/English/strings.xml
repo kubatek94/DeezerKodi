@@ -11,13 +11,14 @@
     <string id="2003">My albums</string>
     <string id="2004">My artists</string>
     <string id="2005">Search</string>
+    <string id="2006">Recently played</string>
 
     <!-- Dialogs -->
-    <string id="2006">Sign in required</string>
-    <string id="2007">You need to sign in to use Deezer</string>
-    <string id="2008">Do you want to try again, or exit Deezer?</string>
-    <string id="2009">Try again</string>
-    <string id="2010">Exit</string>
+    <string id="2050">Sign in required</string>
+    <string id="2051">You need to sign in to use Deezer</string>
+    <string id="2052">Do you want to try again, or exit Deezer?</string>
+    <string id="2053">Try again</string>
+    <string id="2054">Exit</string>
 
     <!-- Artist View Menu -->
     <string id="3000">Top</string>

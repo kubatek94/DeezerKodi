@@ -12,6 +12,7 @@ from .MyAlbumsScene import MyAlbumsScene
 from .MyArtistsScene import MyArtistsScene
 from .SearchScene import SearchScene
 from .ChartScene import ChartScene
+from .RecentScene import RecentScene
 
 from ..DeezerApi import Connection, Api
 from ..cache import Cache
@@ -34,7 +35,8 @@ class SceneRouter(object):
             "playlists": lambda: MyPlaylistsScene(self),
             "albums": lambda: MyAlbumsScene(self),
             "artists": lambda: MyArtistsScene(self),
-            "search": lambda: SearchScene(self)
+            "search": lambda: SearchScene(self),
+            "recent": lambda: RecentScene(self)
         }
 
     # url consists of the path and query parts
@@ -95,8 +97,8 @@ class SceneRouter(object):
                 self.addon.openSettings()
                 if not self._has_credentials():
                     # Sign in required | Do you want to try again, or exit Deezer? | Try again | Exit
-                    try_again = dialog.yesno(self.language(2006), self.language(2008), yeslabel=self.language(2009),
-                                             nolabel=self.language(2010))
+                    try_again = dialog.yesno(self.language(2050), self.language(2052), yeslabel=self.language(2053),
+                                             nolabel=self.language(2054))
                     if not try_again:
                         return False
                 else:

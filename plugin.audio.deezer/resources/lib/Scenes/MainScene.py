@@ -39,6 +39,10 @@ class MainScene(Scene):
             2005: {
                 "image": xbmc.translatePath(os.path.join(self.scene_router.images_path, "search-button.png")),
                 "url": "%s?scene=%s" % (self.scene_router.base_url, "search")
+            },
+            2006: {
+                "image": xbmc.translatePath(os.path.join(self.scene_router.images_path, "recent-button.png")),
+                "url": "%s?scene=%s" % (self.scene_router.base_url, "recent")
             }
         }
 

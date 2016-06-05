@@ -5,6 +5,7 @@ from .PlaylistsView import PlaylistsView
 from .RadioChannelsView import RadioChannelsView
 from .ChartView import ChartView
 from .SearchView import SearchView
+from .RecentView import RecentView
 
 
 class ViewRouter(object):
@@ -21,7 +22,8 @@ class ViewRouter(object):
             "artisttop": lambda parent: ArtistTopView(scene=self.scene, view_router=self, parent_view=parent),
             "radiochannels": lambda parent: RadioChannelsView(scene=self.scene, view_router=self, parent_view=parent),
             "chart": lambda parent: ChartView(scene=self.scene, view_router=self, parent_view=parent),
-            "search": lambda parent: SearchView(scene=self.scene, view_router=self, parent_view=parent)
+            "search": lambda parent: SearchView(scene=self.scene, view_router=self, parent_view=parent),
+            "recent": lambda parent: RecentView(scene=self.scene, view_router=self, parent_view=parent)
         }
 
     # e.g path = /playlists/tracks/1234567
