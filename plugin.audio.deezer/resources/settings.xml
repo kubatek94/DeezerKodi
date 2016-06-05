@@ -1,6 +1,6 @@
 <settings>
-   <category label="User credentials">
-   <setting id="username" type="text" label="1000" default=""/>
-   <setting id="password" type="text" option="hidden" label="1001" default="" />
-   </category> 	
+    <category label="User credentials">
+        <setting id="username" type="text" label="1000" default=""/>
+        <setting id="password" type="text" option="hidden" label="1001" default=""/>
+    </category>
 </settings>

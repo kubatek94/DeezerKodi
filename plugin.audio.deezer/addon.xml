@@ -8,9 +8,9 @@
         <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.repository" name="kubatek94's Kodi Repository">
-       <info>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml</info>
-       <checksum>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml.md5</checksum>
-       <datadir zip="true">https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/</datadir>    
+        <info>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/</datadir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>

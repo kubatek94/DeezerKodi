@@ -35,10 +35,12 @@ class Connection(object):
         self._obtain_access_token()
 
     """save username"""
+
     def set_username(self, username):
         self._username = username
 
     """save md5 of user password"""
+
     def set_password(self, password):
         self._password = password
         if self._password is not None:
@@ -54,6 +56,7 @@ class Connection(object):
         return dct
 
     """obtain access token by pretending to be a smart tv"""
+
     def _obtain_access_token(self):
         if self._username is None or self._password is None:
             raise Exception("Username and password is required!")
@@ -73,12 +76,14 @@ class Connection(object):
                 raise Exception("Could not obtain access token!")
 
     """Given two dicts, merge them into a new dict as a shallow copy."""
+
     def _merge_two_dicts(self, x, y):
         z = x.copy()
         z.update(y)
         return z
 
     """make request to the api and return response as a dict"""
+
     def make_request(self, service, id='', method='', parameters={}):
         base_url = self._API_BASE_URL.format(service=service, id=id, method=method)
         print "make_request: %s" % base_url
