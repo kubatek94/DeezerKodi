@@ -1,6 +1,6 @@
 from resources.lib.Scenes.SceneRouter import SceneRouter
 
-sceneRouter = SceneRouter()
-sceneRouter.route(sys.argv)
+scene_router = SceneRouter()
+scene_router.route(sys.argv)
 
-del sceneRouter
+del scene_router

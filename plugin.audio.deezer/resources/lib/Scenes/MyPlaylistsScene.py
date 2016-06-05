@@ -1,21 +1,19 @@
 from .Scene import Scene
 from ..cache import Cache
-from .Views.PlaylistsView import PlaylistsView
 from .Views.ViewRouter import ViewRouter
 
 class MyPlaylistsScene(Scene):
-	def __init__(self, sceneRouter):
-		super(MyPlaylistsScene, self).__init__(sceneRouter, "playlists", "My Playlists Scene")
-		print "Initialise MyPlaylistsScene"
+	def __init__(self, scene_router):
+		super(MyPlaylistsScene, self).__init__(scene_router, "playlists", "My Playlists Scene")
 
 		self.cache = Cache("MyPlaylistsScene")
 
-		self.user = self.sceneRouter.getUser()
-		self.playlists = self.cache.get('playlists', defaultProducer = lambda: self.user.getPlaylists())
+		self.user = self.scene_router.get_user()
+		self.playlists = self.cache.get('playlists', default_producer = lambda: self.user.get_playlists())
 
-		viewRouter = ViewRouter(self)
-		view = viewRouter.route(self.sceneRouter.getPath(self))
-		viewRouter.root.setLazyPlaylists(lambda:self.playlists)
-		self.setView(view)
+		view_router = ViewRouter(self)
+		view = view_router.route(self.scene_router.get_path(self))
+		view_router.root.set_lazy_playlists(lambda:self.playlists)
+		self.set_view(view)
 
 		self.cache.save()

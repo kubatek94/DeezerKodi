@@ -1,7 +1,4 @@
 from .View import View
-from .TracksView import TracksView
-from .AlbumsView import AlbumsView
-from .PlaylistsView import PlaylistsView
 
 import os
 import xbmc
@@ -9,76 +6,75 @@ import xbmcgui
 import xbmcplugin
 
 class ChartView(View):
-	def __init__(self, scene, viewRouter, parentView = None):
-		super(ChartView, self).__init__(scene, viewRouter, "chart", parentView)
-		self.lazyChart = None
+	def __init__(self, scene, view_router, parent_view = None):
+		super(ChartView, self).__init__(scene, view_router, "chart", parent_view)
+		self.lazy_chart = None
 
-	def setLazyChart(self, lazyChart):
-		self.lazyChart = lazyChart
+	def set_lazy_chart(self, lazy_chart):
+		self.lazy_chart = lazy_chart
 
-	def _getLazyChart(self):
+	def _get_lazy_chart(self):
 		#try to get lazy chart from the parent if none are set
-		if self.lazyChart is None:
-			self.lazyChart = self.parentView.getLazyChart()
-		return self.lazyChart
+		if self.lazy_chart is None:
+			self.lazy_chart = self.parent_view.get_lazy_chart()
+		return self.lazy_chart
 
 	#to display the albums
-	def getLazyAlbums(self):
-		chart = self._getLazyChart()()
-		return lambda:chart.getAlbums()
+	def get_lazy_albums(self):
+		chart = self._get_lazy_chart()()
+		return lambda:chart.get_albums()
 
 	#to display the artists
-	def getLazyArtists(self):
-		chart = self._getLazyChart()()
-		return lambda:chart.getArtists()
+	def get_lazy_artists(self):
+		chart = self._get_lazy_chart()()
+		return lambda:chart.get_artists()
 
 	#to display the playlists
-	def getLazyPlaylists(self):
-		chart = self._getLazyChart()()
-		return lambda:chart.getPlaylists()
+	def get_lazy_playlists(self):
+		chart = self._get_lazy_chart()()
+		return lambda:chart.get_playlists()
 
 	#to display the tracks
-	def getListItems(self):
-		chart = self._getLazyChart()()
-		listItems = []
-		for track in chart.getTracks():
+	def get_list_items(self):
+		chart = self._get_lazy_chart()()
+		list_items = []
+		for track in chart.get_tracks():
 			try:
-				listItem = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
-				listItem.setProperty('IsPlayable', 'true')
-				listItem.setArt({'fanart': track.artist.picture_big})
-				self.addItemTrackInfo(listItem, track)
-				listItems.append((self.getUrl("/%d" % track.id), listItem, False))
+				list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
+				list_item.setProperty('IsPlayable', 'true')
+				list_item.setArt({'fanart': track.artist.picture_big})
+				self.add_item_track_info(list_item, track)
+				list_items.append((self.get_url("/%d" % track.id), list_item, False))
 			except:
 				pass
-		return listItems
+		return list_items
 
 	#to diplay first menu
-	def _showChartMenu(self):
+	def _show_chart_menu(self):
 		items = {
 			3005 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "genre-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl('/tracks')
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "genre-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url('/tracks')
 			},
 			3006 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "myalbums-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl('/albums')
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "myalbums-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url('/albums')
 			},
 			3007 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "myartists-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl('/artists')
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "myartists-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url('/artists')
 			},
 			3008 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "myplaylists-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl('/playlists')
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "myplaylists-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url('/playlists')
 			}
 		}
-		listItems = []
+		list_items = []
 		for item in items:
-			listItem = xbmcgui.ListItem(self.scene.sceneRouter.language(item), iconImage=items[item]["image"])
-			listItem.setArt({'fanart': self.scene.sceneRouter.fanartPath})
-			listItems.append((items[item]["url"], listItem, True))
-		xbmcplugin.addDirectoryItems(self.scene.sceneRouter.addonHandle, listItems)
+			list_item = xbmcgui.ListItem(self.scene.scene_router.language(item), iconImage=items[item]["image"])
+			list_item.setArt({'fanart': self.scene.scene_router.fanart_path})
+			list_items.append((items[item]["url"], list_item, True))
+		xbmcplugin.addDirectoryItems(self.scene.scene_router.addon_handle, list_items)
 
 	def show(self):
-		print "Show ChartView"
-		self._showChartMenu()
+		self._show_chart_menu()

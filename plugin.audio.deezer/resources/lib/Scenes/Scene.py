@@ -1,12 +1,11 @@
 
 class Scene(object):
-	def __init__(self, sceneRouter, name = "scene", title = "Scene"):
-		print "Initialise Scene"
-		self.sceneRouter = sceneRouter
+	def __init__(self, scene_router, name = "scene", title = "Scene"):
+		self.scene_router = scene_router
 		self.name = name
 		self.title = title
 
-	def setView(self, view):
+	def set_view(self, view):
 		self.view = view
 		self.view.show()
 

@@ -1,21 +1,19 @@
 from .Scene import Scene
 from ..cache import Cache
-from .Views.AlbumsView import AlbumsView
 from .Views.ViewRouter import ViewRouter
 
 class MyAlbumsScene(Scene):
-	def __init__(self, sceneRouter):
-		super(MyAlbumsScene, self).__init__(sceneRouter, "albums", "My Albums Scene")
-		print "Initialise MyAlbumsScene"
+	def __init__(self, scene_router):
+		super(MyAlbumsScene, self).__init__(scene_router, "albums", "My Albums Scene")
 
 		self.cache = Cache("MyAlbumsScene")
 
-		self.user = self.sceneRouter.getUser()
-		self.albums = self.cache.get('albums', defaultProducer = lambda: self.user.getAlbums())
+		self.user = self.scene_router.get_user()
+		self.albums = self.cache.get('albums', default_producer = lambda: self.user.get_albums())
 
-		viewRouter = ViewRouter(self)
-		view = viewRouter.route(self.sceneRouter.getPath(self))
-		viewRouter.root.setLazyAlbums(lambda:self.albums)
-		self.setView(view)
+		view_router = ViewRouter(self)
+		view = view_router.route(self.scene_router.get_path(self))
+		view_router.root.set_lazy_albums(lambda:self.albums)
+		self.set_view(view)
 
 		self.cache.save()

@@ -12,15 +12,15 @@ class ViewRouter(object):
 		self.root = None
 
 		self.views = {
-			"tracks" : lambda parent:TracksView(scene=self.scene, viewRouter=self, parentView=parent),
-			"albums" : lambda parent:AlbumsView(scene=self.scene, viewRouter=self, parentView=parent),
-			"artists" : lambda parent:ArtistsView(scene=self.scene, viewRouter=self, parentView=parent),
-			"playlists" : lambda parent:PlaylistsView(scene=self.scene, viewRouter=self, parentView=parent),
-			"artistmenu" : lambda parent:ArtistMenuView(scene=self.scene, viewRouter=self, parentView=parent),
-			"artisttop" : lambda parent:ArtistTopView(scene=self.scene, viewRouter=self, parentView=parent),
-			"radiochannels" : lambda parent:RadioChannelsView(scene=self.scene, viewRouter=self, parentView=parent),
-			"chart" : lambda parent:ChartView(scene=self.scene, viewRouter=self, parentView=parent),
-			"search" : lambda parent:SearchView(scene=self.scene, viewRouter=self, parentView=parent)
+			"tracks" : lambda parent:TracksView(scene=self.scene, view_router=self, parent_view=parent),
+			"albums" : lambda parent:AlbumsView(scene=self.scene, view_router=self, parent_view=parent),
+			"artists" : lambda parent:ArtistsView(scene=self.scene, view_router=self, parent_view=parent),
+			"playlists" : lambda parent:PlaylistsView(scene=self.scene, view_router=self, parent_view=parent),
+			"artistmenu" : lambda parent:ArtistMenuView(scene=self.scene, view_router=self, parent_view=parent),
+			"artisttop" : lambda parent:ArtistTopView(scene=self.scene, view_router=self, parent_view=parent),
+			"radiochannels" : lambda parent:RadioChannelsView(scene=self.scene, view_router=self, parent_view=parent),
+			"chart" : lambda parent:ChartView(scene=self.scene, view_router=self, parent_view=parent),
+			"search" : lambda parent:SearchView(scene=self.scene, view_router=self, parent_view=parent)
 		}
 
 	#e.g path = /playlists/tracks/1234567
@@ -36,5 +36,5 @@ class ViewRouter(object):
 					self.root = parent
 			else:
 				if parent is not None:
-					parent.setID(part)
+					parent.set_id(part)
 		return parent

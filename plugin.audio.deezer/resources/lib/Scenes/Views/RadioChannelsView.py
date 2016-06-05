@@ -4,49 +4,48 @@ import xbmcgui
 import xbmcplugin
 
 class RadioChannelsView(View):
-	def __init__(self, scene, viewRouter, parentView = None):
-		super(RadioChannelsView, self).__init__(scene, viewRouter, "radiochannels", parentView)
-		self.lazyRadios = None
+	def __init__(self, scene, view_router, parent_view = None):
+		super(RadioChannelsView, self).__init__(scene, view_router, "radiochannels", parent_view)
+		self.lazy_radios = None
 
-	def setLazyRadios(self, lazyRadios):
-		self.lazyRadios = lazyRadios
+	def set_lazy_radios(self, lazy_radios):
+		self.lazy_radios = lazy_radios
 
-	def _getLazyRadios(self):
+	def _get_lazy_radios(self):
 		#try to get lazy radios from the parent if none are set
-		if self.lazyRadios is None:
-			self.lazyRadios = self.parentView.getLazyRadios()
-		return self.lazyRadios
+		if self.lazy_radios is None:
+			self.lazy_radios = self.parent_view.get_lazy_radios()
+		return self.lazy_radios
 
-	def _showRadios(self):
-		self.radios = self._getLazyRadios()()
-		listItems = []
+	def _show_radios(self):
+		self.radios = self._get_lazy_radios()()
+		list_items = []
 
 		for i in range(0, len(self.radios)):
 			try:
 				radio = self.radios[i]
-				listItem = xbmcgui.ListItem(radio.title, thumbnailImage=radio.picture_big)
-				listItem.setArt({'fanart': self.scene.sceneRouter.fanartPath})
-				listItems.append((self.getUrl("/%d/tracks" % i), listItem, True))
+				list_item = xbmcgui.ListItem(radio.title, thumbnailImage=radio.picture_big)
+				list_item.setArt({'fanart': self.scene.scene_router.fanart_path})
+				list_items.append((self.get_url("/%d/tracks" % i), list_item, True))
 			except:
 				pass
-		xbmcplugin.addDirectoryItems(self.scene.sceneRouter.addonHandle, listItems)
+		xbmcplugin.addDirectoryItems(self.scene.scene_router.addon_handle, list_items)
 
-	def getListItems(self):
-		self.radios = self._getLazyRadios()()
+	def get_list_items(self):
+		self.radios = self._get_lazy_radios()()
 		radios = self.radios[self.id]
-		listItems = []
+		list_items = []
 
-		for track in radios.getTracks():
+		for track in radios.get_tracks():
 			try:
-				listItem = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
-				listItem.setProperty('IsPlayable', 'true')
-				listItem.setArt({'fanart': track.artist.picture_big})
-				self.addItemTrackInfo(listItem, track)
-				listItems.append((self.getUrl("/%d" % track.id), listItem, False))
+				list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
+				list_item.setProperty('IsPlayable', 'true')
+				list_item.setArt({'fanart': track.artist.picture_big})
+				self.add_item_track_info(list_item, track)
+				list_items.append((self.get_url("/%d" % track.id), list_item, False))
 			except:
 				pass
-		return listItems
+		return list_items
 
 	def show(self):
-		print "Show RadioChannelsView"
-		self._showRadios()
+		self._show_radios()

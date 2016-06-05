@@ -5,45 +5,44 @@ import xbmcgui
 import xbmcplugin
 
 class MainScene(Scene):
-	def __init__(self, sceneRouter):
-		super(MainScene, self).__init__(sceneRouter, "main", "Main Scene")
-		print "Initialise MainScene"
+	def __init__(self, scene_router):
+		super(MainScene, self).__init__(scene_router, "main", "Main Scene")
 		self.color = "white"
-		self._makeScene()
+		self._make_scene()
 
-	def _makeScene(self):
+	def _make_scene(self):
 		items = {
 			2000 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "chart-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "chart")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "chart-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "chart")
 			},
 			2001 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "radiochannels-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "radiochannels")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "radiochannels-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "radiochannels")
 			},
 			2002 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "myplaylists-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "playlists")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "myplaylists-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "playlists")
 			},
 			2003 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "myalbums-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "albums")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "myalbums-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "albums")
 			},
 			2004 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "myartists-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "artists")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "myartists-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "artists")
 			},
 			2005 : {
-				"image" : xbmc.translatePath(os.path.join(self.sceneRouter.imagesPath, "search-%s.png" % self.color)),
-				"url" : "%s?scene=%s" % (self.sceneRouter.baseUrl, "search")
+				"image" : xbmc.translatePath(os.path.join(self.scene_router.images_path, "search-%s.png" % self.color)),
+				"url" : "%s?scene=%s" % (self.scene_router.base_url, "search")
 			}
 		}
 
-		listItems = []
+		list_items = []
 
 		for item in items:
-			listItem = xbmcgui.ListItem(self.sceneRouter.language(item), iconImage=items[item]["image"], thumbnailImage="")
-			listItem.setArt({'fanart': self.sceneRouter.fanartPath})
-			listItems.append((items[item]["url"], listItem, True))
+			list_item = xbmcgui.ListItem(self.scene_router.language(item), iconImage=items[item]["image"], thumbnailImage="")
+			list_item.setArt({'fanart': self.scene_router.fanart_path})
+			list_items.append((items[item]["url"], list_item, True))
 
-		xbmcplugin.addDirectoryItems(self.sceneRouter.addonHandle, listItems)
+		xbmcplugin.addDirectoryItems(self.scene_router.addon_handle, list_items)

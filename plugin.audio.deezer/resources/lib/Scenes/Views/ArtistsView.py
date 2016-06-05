@@ -7,140 +7,138 @@ import xbmcplugin
 
 
 class ArtistTopView(View):
-	def __init__(self, scene, viewRouter, parentView = None):
-		super(ArtistTopView, self).__init__(scene, viewRouter, "artisttop", parentView)
+	def __init__(self, scene, view_router, parent_view = None):
+		super(ArtistTopView, self).__init__(scene, view_router, "artisttop", parent_view)
 		self.lazyTop = None
 
-	def _getLazyTop(self):
+	def _get_lazy_top(self):
 		#try to get lazy top from the parent if none are set
 		if self.lazyTop is None:
-			self.lazyTop = self.parentView.getLazyTop()
+			self.lazyTop = self.parent_view.get_lazy_top()
 		return self.lazyTop
 
-	def _showTop(self):
-		self.topTracks = self._getLazyTop()()
-		listItems = []
+	def _show_top(self):
+		self.top_tracks = self._get_lazy_top()()
+		list_items = []
 
-		for i in range(0, len(self.topTracks)):
+		for i in range(0, len(self.top_tracks)):
 			try:
-				track = self.topTracks[i]
-				listItem = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
-				listItem.setProperty('IsPlayable', 'true')
-				listItem.setArt({'fanart': self.scene.sceneRouter.fanartPath})
-				self.addItemTrackInfo(listItem, track)
-				listItems.append((self.getUrl("/tracks/%d" % track.id), listItem, False))
+				track = self.top_tracks[i]
+				list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
+				list_item.setProperty('IsPlayable', 'true')
+				list_item.setArt({'fanart': self.scene.scene_router.fanart_path})
+				self.add_item_track_info(list_item, track)
+				list_items.append((self.get_url("/tracks/%d" % track.id), list_item, False))
 			except:
 				pass
-		xbmcplugin.addDirectoryItems(self.scene.sceneRouter.addonHandle, listItems)
-		xbmcplugin.setContent(self.scene.sceneRouter.addonHandle, 'songs')
+		xbmcplugin.addDirectoryItems(self.scene.scene_router.addon_handle, list_items)
+		xbmcplugin.setContent(self.scene.scene_router.addon_handle, 'songs')
 
 	def show(self):
-		self._showTop()
+		self._show_top()
 
 
 class ArtistMenuView(View):
-	def __init__(self, scene, viewRouter, parentView = None):
-		super(ArtistMenuView, self).__init__(scene, viewRouter, "artistmenu", parentView)
+	def __init__(self, scene, view_router, parent_view = None):
+		super(ArtistMenuView, self).__init__(scene, view_router, "artistmenu", parent_view)
 
-	def getLazyAlbums(self):
-		artist = self.parentView.getArtist()
-		return lambda:artist.getAlbums()
+	def get_lazy_albums(self):
+		artist = self.parent_view.get_artist()
+		return lambda:artist.get_albums()
 
-	def getLazyPlaylists(self):
-		artist = self.parentView.getArtist()
-		return lambda:artist.getPlaylists()
+	def get_lazy_playlists(self):
+		artist = self.parent_view.get_artist()
+		return lambda:artist.get_playlists()
 
-	def getLazyRadio(self):
-		artist = self.parentView.getArtist()
-		return lambda:artist.getRadio()
+	def get_lazy_radio(self):
+		artist = self.parent_view.get_artist()
+		return lambda:artist.get_radio()
 
-	def getLazyTop(self):
-		artist = self.parentView.getArtist()
-		return lambda:artist.getTop()
+	def get_lazy_top(self):
+		artist = self.parent_view.get_artist()
+		return lambda:artist.get_top()
 
 	#to display the radio as tracks
-	def getListItems(self):
-		artist = self.parentView.getArtist()
-		listItems = []
-		for track in artist.getRadio():
+	def get_list_items(self):
+		artist = self.parent_view.get_artist()
+		list_items = []
+		for track in artist.get_radio():
 			try:
-				listItem = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
-				listItem.setProperty('IsPlayable', 'true')
-				listItem.setArt({'fanart': track.artist.picture_big})
-				self.addItemTrackInfo(listItem, track)
-				listItems.append((self.getUrl("/%d" % track.id), listItem, False))
+				list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title), thumbnailImage=track.album.cover_big)
+				list_item.setProperty('IsPlayable', 'true')
+				list_item.setArt({'fanart': track.artist.picture_big})
+				self.add_item_track_info(list_item, track)
+				list_items.append((self.get_url("/%d" % track.id), list_item, False))
 			except:
 				pass
-		return listItems
+		return list_items
 
-	def _showMenu(self):
+	def _show_menu(self):
 		items = {
 			3000 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "genre-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl("/artisttop")
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "genre-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url("/artisttop")
 			},
 			3001 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "myalbums-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl("/albums")
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "myalbums-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url("/albums")
 			},
 			3002 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "myplaylists-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl("/playlists")
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "myplaylists-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url("/playlists")
 			},
 			3003 : {
-				"image" : xbmc.translatePath(os.path.join(self.scene.sceneRouter.imagesPath, "radiochannels-%s.png" % self.scene.sceneRouter.color)),
-				"url" : self.getUrl("/tracks")
+				"image" : xbmc.translatePath(os.path.join(self.scene.scene_router.images_path, "radiochannels-%s.png" % self.scene.scene_router.color)),
+				"url" : self.get_url("/tracks")
 			}
 		}
-		artist = self.parentView.getArtist()
-		listItems = []
+		artist = self.parent_view.get_artist()
+		list_items = []
 		for item in items:
 			try:
-				listItem = xbmcgui.ListItem(self.scene.sceneRouter.language(item), iconImage=items[item]["image"])
-				listItem.setArt({'fanart': artist.picture_big})
-				listItems.append((items[item]["url"], listItem, True))
+				list_item = xbmcgui.ListItem(self.scene.scene_router.language(item), iconImage=items[item]["image"])
+				list_item.setArt({'fanart': artist.picture_big})
+				list_items.append((items[item]["url"], list_item, True))
 			except:
 				pass
-		xbmcplugin.addDirectoryItems(self.scene.sceneRouter.addonHandle, listItems)
+		xbmcplugin.addDirectoryItems(self.scene.scene_router.addon_handle, list_items)
 
 	def show(self):
-		print "Show MenuView"
-		self._showMenu()
+		self._show_menu()
 
 
 
 class ArtistsView(View):
-	def __init__(self, scene, viewRouter, parentView = None):
-		super(ArtistsView, self).__init__(scene, viewRouter, "artists", parentView)
-		self.lazyArtists = None
+	def __init__(self, scene, view_router, parent_view = None):
+		super(ArtistsView, self).__init__(scene, view_router, "artists", parent_view)
+		self.lazy_artists = None
 
-	def setLazyArtists(self, lazyArtists):
-		self.lazyArtists = lazyArtists
+	def set_lazy_artists(self, lazy_artists):
+		self.lazy_artists = lazy_artists
 
-	def _getLazyArtists(self):
+	def _get_lazy_artists(self):
 		#try to get lazy artists from the parent if none are set
-		if self.lazyArtists is None:
-			self.lazyArtists = self.parentView.getLazyArtists()
-		return self.lazyArtists
+		if self.lazy_artists is None:
+			self.lazy_artists = self.parent_view.get_lazy_artists()
+		return self.lazy_artists
 
-	def getArtist(self):
-		self.artists = self._getLazyArtists()()
+	def get_artist(self):
+		self.artists = self._get_lazy_artists()()
 		return self.artists[self.id]
 
 	def _showArtists(self):
-		self.artists = self._getLazyArtists()()
-		listItems = []
+		self.artists = self._get_lazy_artists()()
+		list_items = []
 
 		for i in range(0, len(self.artists)):
 			try:
 				artist = self.artists[i]
-				listItem = xbmcgui.ListItem(artist.name, thumbnailImage=artist.picture_big)
-				listItem.setArt({'fanart': self.scene.sceneRouter.fanartPath})
-				listItems.append((self.getUrl("/%d/artistmenu" % i), listItem, True))
+				list_item = xbmcgui.ListItem(artist.name, thumbnailImage=artist.picture_big)
+				list_item.setArt({'fanart': self.scene.scene_router.fanart_path})
+				list_items.append((self.get_url("/%d/artistmenu" % i), list_item, True))
 			except:
 				pass
-		xbmcplugin.addDirectoryItems(self.scene.sceneRouter.addonHandle, listItems)
+		xbmcplugin.addDirectoryItems(self.scene.scene_router.addon_handle, list_items)
 
 	def show(self):
-		print "Show ArtistsView"
 		self._showArtists()

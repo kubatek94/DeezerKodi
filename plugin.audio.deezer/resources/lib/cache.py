@@ -31,14 +31,14 @@ class Cache(object):
 			else:
 				return True
 
-	def get(self, key, defaultValue=None, defaultProducer=None, ttl=TTL):
+	def get(self, key, default_value=None, default_producer=None, ttl=TTL):
 		if self.has(key):
 			return self.cache[key]['value']
-		if defaultProducer is not None:
-			product = defaultProducer()
+		if default_producer is not None:
+			product = default_producer()
 			self.set(key, product, ttl)
 			return product
-		return defaultValue
+		return default_value
 
 	def save(self):
 		pickle.dump(self.cache, open(self.name, "wb"))
