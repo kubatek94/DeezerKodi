@@ -25,7 +25,6 @@ class SceneRouter(object):
         self.resources_path = xbmc.translatePath(os.path.join(self.addon_path, 'resources'))
         self.images_path = xbmc.translatePath(os.path.join(self.resources_path, 'img'))
         self.fanart_path = xbmc.translatePath(os.path.join(self.addon_path, 'fanart.jpg'))
-        self.color = "white"
         self.cache = Cache("deezerapi")
 
         self.scenes = {

@@ -79,22 +79,22 @@ class ArtistMenuView(View):
         items = {
             3000: {
                 "image": xbmc.translatePath(
-                    os.path.join(self.scene.scene_router.images_path, "genre-%s.png" % self.scene.scene_router.color)),
+                    os.path.join(self.scene.scene_router.images_path, "genre-button.png")),
                 "url": self.get_url("/artisttop")
             },
             3001: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myalbums-%s.png" % self.scene.scene_router.color)),
+                                                         "myalbums-button.png")),
                 "url": self.get_url("/albums")
             },
             3002: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myplaylists-%s.png" % self.scene.scene_router.color)),
+                                                         "myplaylists-button.png")),
                 "url": self.get_url("/playlists")
             },
             3003: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "radiochannels-%s.png" % self.scene.scene_router.color)),
+                                                         "radiochannels-button.png")),
                 "url": self.get_url("/tracks")
             }
         }

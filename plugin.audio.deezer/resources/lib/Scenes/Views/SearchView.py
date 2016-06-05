@@ -95,22 +95,22 @@ class SearchView(View):
         items = {
             3010: {
                 "image": xbmc.translatePath(
-                    os.path.join(self.scene.scene_router.images_path, "search-%s.png" % self.scene.scene_router.color)),
+                    os.path.join(self.scene.scene_router.images_path, "search-button.png")),
                 "url": self.get_url('/3010/tracks')  # search all
             },
             3011: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myartists-%s.png" % self.scene.scene_router.color)),
+                                                         "myartists-button.png")),
                 "url": self.get_url('/3011/artists')  # search artist
             },
             3012: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myalbums-%s.png" % self.scene.scene_router.color)),
+                                                         "myalbums-button.png")),
                 "url": self.get_url('/3012/albums')  # search album
             },
             3013: {
                 "image": xbmc.translatePath(
-                    os.path.join(self.scene.scene_router.images_path, "search-%s.png" % self.scene.scene_router.color)),
+                    os.path.join(self.scene.scene_router.images_path, "search-button.png")),
                 "url": self.get_url('/3013/tracks')  # search track
             }
         }

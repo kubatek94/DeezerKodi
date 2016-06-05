@@ -56,22 +56,22 @@ class ChartView(View):
         items = {
             3005: {
                 "image": xbmc.translatePath(
-                    os.path.join(self.scene.scene_router.images_path, "genre-%s.png" % self.scene.scene_router.color)),
+                    os.path.join(self.scene.scene_router.images_path, "genre-button.png")),
                 "url": self.get_url('/tracks')
             },
             3006: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myalbums-%s.png" % self.scene.scene_router.color)),
+                                                         "myalbums-button.png")),
                 "url": self.get_url('/albums')
             },
             3007: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myartists-%s.png" % self.scene.scene_router.color)),
+                                                         "myartists-button.png")),
                 "url": self.get_url('/artists')
             },
             3008: {
                 "image": xbmc.translatePath(os.path.join(self.scene.scene_router.images_path,
-                                                         "myplaylists-%s.png" % self.scene.scene_router.color)),
+                                                         "myplaylists-button.png")),
                 "url": self.get_url('/playlists')
             }
         }
