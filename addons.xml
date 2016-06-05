@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.audio.deezer" name="Deezer" version="0.0.1" provider-name="kubatek94">
+<addon id="plugin.audio.deezer" name="Deezer" version="0.0.2" provider-name="kubatek94">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.requests" version="2.7.0"/>
@@ -9,9 +9,9 @@
         <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.repository" name="kubatek94's Kodi Repository">
-       <info>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml</info>
-       <checksum>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml.md5</checksum>
-       <datadir zip="true">https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/</datadir>
+        <info>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/kubatek94/DeezerKodi/master/</datadir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
