@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <category label="User credentials">
+    <category label="1002">
         <setting id="username" type="text" label="1000" default=""/>
         <setting id="password" type="text" option="hidden" label="1001" default=""/>
+        <setting id="familySubscription" type="bool" label="1003" default="false"/>
     </category>
 </settings>

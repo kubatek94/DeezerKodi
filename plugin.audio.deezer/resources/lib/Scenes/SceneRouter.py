@@ -15,7 +15,7 @@ from .ChartScene import ChartScene
 from .RecentScene import RecentScene
 
 from ..DeezerApi import Connection, Api
-from ..cache import Cache
+from ..kodi.cache import Cache
 
 
 class SceneRouter(object):

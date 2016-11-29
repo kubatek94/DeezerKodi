@@ -1,0 +1,1 @@
+#This file will compile the routes and store them before packaging, which will be more efficient than compiling them at runtime

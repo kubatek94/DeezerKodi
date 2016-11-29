@@ -3,6 +3,8 @@
     <!-- Settings -->
     <string id="1000">Username</string>
     <string id="1001">Password</string>
+    <string id="1002">User credentials</string>
+    <string id="1003">Family subscription</string>
 
     <!-- Menu labels -->
     <string id="2000">Chart</string>
@@ -12,6 +14,7 @@
     <string id="2004">My artists</string>
     <string id="2005">Search</string>
     <string id="2006">Recently played</string>
+    <string id="2007">Settings</string>
 
     <!-- Dialogs -->
     <string id="2050">Sign in required</string>

@@ -1,5 +1,5 @@
 from .Scene import Scene
-from ..cache import Cache
+from ..kodi.cache import Cache
 from .Views.ViewRouter import ViewRouter
 
 
