@@ -14,7 +14,7 @@ from .SearchScene import SearchScene
 from .ChartScene import ChartScene
 from .RecentScene import RecentScene
 
-from ..DeezerApi import Connection, Api
+from ..api import Connection, Api
 from ..kodi.cache import Cache
 
 
