@@ -1,12 +1,11 @@
-from ..kodi.compiler import compile
 from ..kodi.response import Response
+from ..kodi.controller import Controller
 
-class Settings(object):
-    def __init__(self, kernel):
-        self.kernel = kernel
+class Settings(Controller):
 
-    @compile('/', 'Settings')
-    @compile('/<user>', 'Settings')
     def show_settings(self, user='me'):
-        print user
-        return Response(self)
+        """
+        @type: settings.Settings
+        """
+        settings = self.get('settings')
+        settings.open()

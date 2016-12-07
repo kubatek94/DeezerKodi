@@ -11,5 +11,5 @@ if config['plugin']['env'] == 'dev':
 request = Request.create_from_globals()
 response = kernel.handle(request)
 
-response.show()
-kernel.terminate(request, response)
+success = response.show()
+kernel.terminate(request, response, success)

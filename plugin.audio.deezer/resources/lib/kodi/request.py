@@ -27,6 +27,12 @@ class Request(object):
     def create_from_globals(cls):
         return Request(sys.argv[0], sys.argv[1], urlparse.parse_qs(sys.argv[2]))
 
+    def get_id(self):
+        return self._id
+
+    def get_args(self):
+        return self._args
+
     def get_path(self):
         return self._path
 

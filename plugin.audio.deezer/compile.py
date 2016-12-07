@@ -33,7 +33,6 @@ class RouterCompiler(ConfigCompiler):
         router = Router(kernel)
 
         def route_compile(rule, cls=None):
-            print "Good compile"
             def compile_decorator(f):
                 router.add_rule(rule, target=f, cls=cls)
                 return f
