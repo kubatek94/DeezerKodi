@@ -27,6 +27,7 @@
 import os
 import sys
 import shutil
+from zipfile import ZipFile
 import re
  
 # Compatibility with 3.0, 3.1 and 3.2 not supporting u"" literals
@@ -37,21 +38,21 @@ if sys.version < '3':
 else:
     def u(x):
         return x
- 
+
+
+def walk_dir(dir='.'):
+    for root, dirs, files in os.walk(dir):
+        for f in files:
+            yield (f, '%s/%s' % (root, f))
+
 class Generator:
     """
         Generates a new addons.xml file from each addons addon.xml file
         and a new addons.xml.md5 hash file. Must be run from the root of
         the checked-out repo. Only handles single depth folder structure.
     """
-    def __init__( self ):
-        # generate files
-        self._generate_addons_file()
-        self._generate_md5_file()
-        # notify user
-        print("Finished updating addons xml and md5 files")
- 
-    def _generate_addons_file( self ):
+
+    def generate_addons_file( self ):
         # addon list
         addons = os.listdir( "." )
         # final addons text
@@ -80,12 +81,19 @@ class Generator:
                         addon_xml += line.rstrip() + "\n"
                     # find version and zip addon
                     if line.startswith("<addon"):
-                    	version = pattern.search(line).group(1)
-                    	output_file = "%s-%s" % (addon, version)
-                    	shutil.make_archive(output_file, 'zip', ".", addon)
-                    	archive = "%s.zip" % output_file
-                    	shutil.move(archive, os.path.join(addon, archive))
-                    	print "Created zip: %s" % output_file
+                        version = pattern.search(line).group(1)
+                        output_file = "%s-%s" % (addon, version)
+
+                        with ZipFile(output_file, 'w') as zip:
+                            for filename, filepath in walk_dir(addon):
+                                #dont add existing releases to the next zip
+                                if filename.endswith('.zip') and filename.startswith(addon):
+                                    continue
+                                zip.write(filepath)
+
+                            shutil.move(output_file, os.path.join(addon, "%s.zip" % output_file))
+                            print "Created zip: %s.zip" % output_file
+
                 # we succeeded so add to our final addons.xml text
                 addons_xml += addon_xml.rstrip() + "\n\n"
             except Exception as e:
@@ -96,7 +104,7 @@ class Generator:
         # save file
         self._save_file( addons_xml.encode( "UTF-8" ), file="addons.xml" )
  
-    def _generate_md5_file( self ):
+    def generate_md5_file( self ):
         # create a new md5 hash
         try:
             import md5
@@ -119,7 +127,15 @@ class Generator:
         except Exception as e:
             # oops
             print("An error occurred saving %s file!\n%s" % ( file, e ))
- 
+
+
 if ( __name__ == "__main__" ):
     # start
-    Generator()
+    generator = Generator()
+
+    # generate files
+    generator.generate_addons_file()
+    generator.generate_md5_file()
+
+    # notify user
+    print("Finished updating addons xml and md5 files")
