@@ -1,6 +1,7 @@
 import requests
 import hashlib
 import json
+import logging
 
 
 def _object_from_type(type, connection, content):
@@ -86,7 +87,7 @@ class Connection(object):
 
     def make_request(self, service, id='', method='', parameters={}):
         base_url = self._API_BASE_URL.format(service=service, id=id, method=method)
-        print "make_request: %s" % base_url
+        logging.debug("make_request: %s | %s", base_url, parameters)
         r = requests.get(base_url, params=self._merge_two_dicts(
             {'output': 'json', 'access_token': self._access_token}, parameters
         ))
