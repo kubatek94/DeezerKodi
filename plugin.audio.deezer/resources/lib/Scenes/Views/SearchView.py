@@ -16,8 +16,8 @@ class SearchView(View):
 
     def _search(self, query):
         # check if query is in the cache first
-        if self.scene.cache.has(query):
-            return self.scene.cache.get(query)
+        if self.scene.cache.has('search_%s_%s' % (self.id, query)):
+            return self.scene.cache.get('search_%s_%s' % (self.id, query))
 
         # otherwise do the search
         search = {
@@ -29,7 +29,7 @@ class SearchView(View):
         if self.id in search:
             results = search[self.id](query)
             # and put the result in the cache
-            self.scene.cache.set(query, results)
+            self.scene.cache.set('search_%s_%s' % (self.id, query), results)
             return results
         return None
 
@@ -74,7 +74,6 @@ class SearchView(View):
 
         if self.query != '':
             results = self._search(self.query)
-            url = self.get_url()
 
             list_items = []
             for track in results:

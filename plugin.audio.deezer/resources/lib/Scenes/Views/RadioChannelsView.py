@@ -34,10 +34,10 @@ class RadioChannelsView(View):
 
     def get_list_items(self):
         self.radios = self._get_lazy_radios()()
-        radios = self.radios[self.id]
-        list_items = []
+        radio = self.radios[self.id]
 
-        for track in radios.get_tracks():
+        list_items = []
+        for track in radio.get_tracks():
             try:
                 list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title),
                                              thumbnailImage=track.album.cover_big)

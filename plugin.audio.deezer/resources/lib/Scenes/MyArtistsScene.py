@@ -11,7 +11,7 @@ class MyArtistsScene(Scene):
 
         view_router = ViewRouter(self)
         view = view_router.route(self.scene_router.get_path(self))
-        view_router.root.set_lazy_artists(lambda: self.cache.get('artists', default_producer=lambda: self.scene_router.get_user().get_artists()))
+        view_router.root.set_lazy_artists(lambda: self.cache.get('artists', default_producer=self.scene_router.get_user().get_artists))
         self.set_view(view)
 
         self.cache.save()

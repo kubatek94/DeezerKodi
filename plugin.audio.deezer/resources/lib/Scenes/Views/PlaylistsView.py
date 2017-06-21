@@ -36,9 +36,9 @@ class PlaylistsView(View):
     def get_list_items(self):
         self.playlists = self._get_lazy_playlists()()
         playlist = self.playlists[self.id]
-        list_items = []
 
-        for track in playlist.get_tracks():
+        list_items = []
+        for track in self.scene.cache.get('playlist_%s' % playlist.id, default_producer=playlist.get_tracks):
             try:
                 list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title),
                                              thumbnailImage=track.album.cover_big)

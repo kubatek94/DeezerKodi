@@ -106,7 +106,7 @@ class SceneRouter(object):
         return True
 
     def get_user(self):
-        self.user = self.cache.get('user', default_producer=lambda: self.api.get_user())
+        self.user = self.cache.get('user', default_producer=self.api.get_user)
         return self.user
 
     def connect(self):

@@ -11,7 +11,7 @@ class MyAlbumsScene(Scene):
 
         view_router = ViewRouter(self)
         view = view_router.route(self.scene_router.get_path(self))
-        view_router.root.set_lazy_albums(lambda: self.cache.get('albums', default_producer=lambda: self.scene_router.get_user().get_albums()))
+        view_router.root.set_lazy_albums(lambda: self.cache.get('albums', default_producer=self.scene_router.get_user().get_albums))
         self.set_view(view)
 
         self.cache.save()

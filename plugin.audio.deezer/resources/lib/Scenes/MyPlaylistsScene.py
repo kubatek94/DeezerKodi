@@ -11,7 +11,7 @@ class MyPlaylistsScene(Scene):
 
         view_router = ViewRouter(self)
         view = view_router.route(self.scene_router.get_path(self))
-        view_router.root.set_lazy_playlists(lambda: self.cache.get('playlists', default_producer=lambda: self.scene_router.get_user().get_playlists()))
+        view_router.root.set_lazy_playlists(lambda: self.cache.get('playlists', default_producer=self.scene_router.get_user().get_playlists))
         self.set_view(view)
 
         self.cache.save()

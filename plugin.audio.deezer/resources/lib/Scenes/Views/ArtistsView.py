@@ -45,25 +45,25 @@ class ArtistMenuView(View):
 
     def get_lazy_albums(self):
         artist = self.parent_view.get_artist()
-        return lambda: artist.get_albums()
+        return lambda: self.scene.cache.get('artistalbums_%s' % artist.id, default_producer=artist.get_albums)
 
     def get_lazy_playlists(self):
         artist = self.parent_view.get_artist()
-        return lambda: artist.get_playlists()
+        return lambda: self.scene.cache.get('artistplaylists_%s' % artist.id, default_producer=artist.get_playlists)
 
     def get_lazy_radio(self):
         artist = self.parent_view.get_artist()
-        return lambda: artist.get_radio()
+        return lambda: self.scene.cache.get('artistradio_%s' % artist.id, default_producer=artist.get_radio)
 
     def get_lazy_top(self):
         artist = self.parent_view.get_artist()
-        return lambda: artist.get_top()
+        return lambda: self.scene.cache.get('artisttop_%s' % artist.id, default_producer=artist.get_top)
 
     # to display the radio as tracks
     def get_list_items(self):
         artist = self.parent_view.get_artist()
         list_items = []
-        for track in artist.get_radio():
+        for track in self.scene.cache.get('artistradio_%s' % artist.id, default_producer=artist.get_radio):
             try:
                 list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title),
                                              thumbnailImage=track.album.cover_big)

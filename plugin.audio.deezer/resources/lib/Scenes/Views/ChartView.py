@@ -23,23 +23,23 @@ class ChartView(View):
     # to display the albums
     def get_lazy_albums(self):
         chart = self._get_lazy_chart()()
-        return lambda: chart.get_albums()
+        return lambda: self.scene.cache.get('chart_albums', default_producer=chart.get_albums)
 
     # to display the artists
     def get_lazy_artists(self):
         chart = self._get_lazy_chart()()
-        return lambda: chart.get_artists()
+        return lambda: self.scene.cache.get('chart_artists', default_producer=chart.get_artists)
 
     # to display the playlists
     def get_lazy_playlists(self):
         chart = self._get_lazy_chart()()
-        return lambda: chart.get_playlists()
+        return lambda: self.scene.cache.get('chart_playlists', default_producer=chart.get_playlists)
 
     # to display the tracks
     def get_list_items(self):
         chart = self._get_lazy_chart()()
         list_items = []
-        for track in chart.get_tracks():
+        for track in self.scene.cache.get('chart_tracks', default_producer=chart.get_tracks):
             try:
                 list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title),
                                              thumbnailImage=track.album.cover_big)

@@ -37,7 +37,7 @@ class AlbumsView(View):
         album = self.albums[self.id]
         list_items = []
 
-        for track in album.get_tracks():
+        for track in self.scene.cache.get('album_%s' % album.id, default_producer=album.get_tracks):
             try:
                 list_item = xbmcgui.ListItem("%s - %s" % (track.artist.name, track.title),
                                              thumbnailImage=album.cover_big)
