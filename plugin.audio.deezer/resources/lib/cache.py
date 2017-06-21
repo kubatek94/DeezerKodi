@@ -38,7 +38,7 @@ class Cache(object):
         self._cache = {}
 
     def set(self, key, value, ttl=TTL):
-        logging.error('set item %s', key)
+        logging.debug('set item %s', key)
 
         self.is_dirty = True
         self.cache[key.lower()] = {'time': time.time(), 'ttl': ttl, 'value': value}
