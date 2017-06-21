@@ -1,0 +1,17 @@
+services:
+  deezer.api.cache:
+    class: kodi.cache:FileCache
+    arguments: ['deezer.api']
+
+  deezer.api:
+    class: api.src.services:Api
+    arguments: ['@deezer.api.connection']
+
+  deezer.api.connection:
+    class: api.src.services:Connection
+    arguments: ['%deezer.api.username%', '%deezer.api.password%']
+    cache: '@deezer.api.cache'
+
+parameters:
+  deezer.api.username: '%setting(username)%'
+  deezer.api.password: '%setting(password)%'

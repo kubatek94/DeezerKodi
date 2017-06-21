@@ -1,0 +1,4 @@
+[submodule "plugin.audio.deezer/resources/kodi"]
+	path = plugin.audio.deezer/resources/kodi
+	url = git@github.com:kubatek94/KodiFramework.git
+	branch = master

@@ -1,0 +1,10 @@
+services:
+  app.cache:
+    class: kodi.cache:FileCache
+    arguments: ['app.cache']
+
+parameters:
+  routing:
+      view_index:
+        pattern: /
+        target: deezer.src.controllers:IndexController:index
