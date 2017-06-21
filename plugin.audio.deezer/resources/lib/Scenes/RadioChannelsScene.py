@@ -8,11 +8,10 @@ class RadioChannelsScene(Scene):
         super(RadioChannelsScene, self).__init__(scene_router, "radiochannels", "Radio Channels Scene")
 
         self.cache = Cache("RadioChannelsScene")
-        self.radios = self.cache.get('radios', default_producer=lambda: self.scene_router.api.get_radios())
 
         view_router = ViewRouter(self)
         view = view_router.route(self.scene_router.get_path(self))
-        view_router.root.set_lazy_radios(lambda: self.radios)
+        view_router.root.set_lazy_radios(lambda: self.cache.get('radios', default_producer=lambda: self.scene_router.api.get_radios()))
         self.set_view(view)
 
         self.cache.save()
