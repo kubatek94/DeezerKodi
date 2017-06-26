@@ -39,11 +39,14 @@ else:
     def u(x):
         return x
 
+def is_file_excluded(f):
+    return f.endswith('.pyc') or f.endswith('.pyo')
 
 def walk_dir(dir='.'):
     for root, dirs, files in os.walk(dir):
         for f in files:
-            yield (f, '%s/%s' % (root, f))
+            if not is_file_excluded(f):
+                yield (f, '%s/%s' % (root, f))
 
 class Generator:
     """
@@ -88,6 +91,8 @@ class Generator:
                             for filename, filepath in walk_dir(addon):
                                 #dont add existing releases to the next zip
                                 if filename.endswith('.zip') and filename.startswith(addon):
+                                    continue
+                                if is_file_excluded(filename):
                                     continue
                                 zip.write(filepath)
 
